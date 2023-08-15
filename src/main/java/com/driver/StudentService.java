@@ -28,4 +28,26 @@ public class StudentService {
         return studentRepository.getStudentsByTeacherName(teacherName);
 
     }
+    public List<String> getAllStudents()
+    {
+        return studentRepository.getAllStudents();
+    }
+    public Student getStudentByName(String studentName)
+    {
+        return studentRepository.getStudentByName(studentName);
+    }
+    public Teacher getTeacherByName(String teacherName)
+    {
+        return studentRepository.getTeacherByName(teacherName);
+    }
+
+    public void deleteTeacherByName(String teacherName)
+    {
+        studentRepository.deleteTeacherByName(teacherName);
+    }
+    public void deleteAllTeachers()
+    {
+        studentRepository.deleteAllTeachers();
+    }
 }
+

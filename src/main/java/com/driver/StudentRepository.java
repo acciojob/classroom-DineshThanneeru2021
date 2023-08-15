@@ -9,17 +9,17 @@ import java.util.List;
 
 public class StudentRepository {
     //HashMap<Integer,Student> sMap=new HashMap<Integer, Student>();
-    ArrayList<Student> studentList=new ArrayList<>();
-    ArrayList<Teacher> teacherList=new ArrayList<>();
+    HashMap<String,Student> studentList=new HashMap<>();
+    HashMap<String,Teacher> teacherList=new HashMap<>();
     HashMap<String,List<String>> teacherStudentMap=new HashMap<>();
     public void addStudent(Student student)
     {
-        studentList.add(student);
+        studentList.put(student.getName(),student);
 
     }
     public void addTeacher(Teacher teacher)
     {
-        teacherList.add(teacher);
+        teacherList.put(teacher.getName(),teacher);
     }
     public void addPair(String teacherName,String studentName)
     {
@@ -45,11 +45,37 @@ public class StudentRepository {
         {
             ans=teacherStudentMap.get(teacherName);
         }
-
-
-
         return ans;
-        //return ans;
+
+    }
+    public List<String> getAllStudents()
+    {
+        List<String> students=new ArrayList<>();
+        for(Student student:studentList.values())
+        {
+            students.add(student.getName());
+        }
+        return students;
+    }
+    public Student getStudentByName(String studentName)
+    {
+
+        return studentList.get(studentName);
+    }
+    public Teacher getTeacherByName(String teacherName)
+    {
+        return teacherList.get(teacherName);
+
+    }
+    public void deleteTeacherByName(String teacherName)
+    {
+        teacherStudentMap.remove(teacherName);
+        teacherList.remove(teacherName);
+    }
+    public void deleteAllTeachers()
+    {
+        teacherList.clear();
+        teacherStudentMap.clear();
     }
 
 
