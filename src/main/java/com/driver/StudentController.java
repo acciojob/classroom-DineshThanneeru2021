@@ -70,7 +70,7 @@ public class StudentController {
         students = studentService.getStudentsByTeacherName(teacher); // Assign list of student by calling service layer method
 
 
-        return new ResponseEntity<>(students,HttpStatus.OK);
+        return new ResponseEntity<>(students,HttpStatus.CREATED);
     }
 
     @GetMapping("/get-all-students")
