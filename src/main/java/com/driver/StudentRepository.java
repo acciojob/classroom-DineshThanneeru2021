@@ -51,20 +51,28 @@ public class StudentRepository {
     public List<String> getAllStudents()
     {
         List<String> students=new ArrayList<>();
-        for(Student student:studentList.values())
+        for(String student:studentList.keySet())
         {
-            students.add(student.getName());
+            students.add(student);
         }
         return students;
     }
     public Student getStudentByName(String studentName)
     {
 
-        return studentList.get(studentName);
+        for(String sName:studentList.keySet()) {
+            if (sName.equals(studentName))
+                return studentList.get(sName);
+        }
+        return null;
     }
     public Teacher getTeacherByName(String teacherName)
     {
-        return teacherList.get(teacherName);
+        for(String tName:teacherList.keySet()) {
+            if (tName.equals(teacherName))
+                return teacherList.get(tName);
+        }
+        return null;
 
     }
     public void deleteTeacherByName(String teacherName)
@@ -74,6 +82,13 @@ public class StudentRepository {
     }
     public void deleteAllTeachers()
     {
+        for (String tName : teacherStudentMap.keySet()) {
+            List<String> students = teacherStudentMap.get(tName);
+            for (String sName : students) {
+                if (studentList.containsKey(sName))
+                    students.remove(sName);
+            }
+        }
         teacherList.clear();
         teacherStudentMap.clear();
     }
