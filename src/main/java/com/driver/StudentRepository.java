@@ -43,7 +43,7 @@ public class StudentRepository {
         List<String> ans=new ArrayList<>();
         if(teacherStudentMap.containsKey(teacherName))
         {
-            ans=teacherStudentMap.get(teacherName);
+            return teacherStudentMap.get(teacherName);
         }
         return ans;
 
@@ -51,9 +51,9 @@ public class StudentRepository {
     public List<String> getAllStudents()
     {
         List<String> students=new ArrayList<>();
-        for(String student:studentList.keySet())
+        for(String sName:studentList.keySet())
         {
-            students.add(student);
+            students.add(sName);
         }
         return students;
     }
@@ -77,8 +77,24 @@ public class StudentRepository {
     }
     public void deleteTeacherByName(String teacherName)
     {
-        teacherStudentMap.remove(teacherName);
-        teacherList.remove(teacherName);
+        List<String> students=new ArrayList<>();
+        if(teacherStudentMap.containsKey(teacherName))
+        {
+            students=teacherStudentMap.get(teacherName);
+            for(String sName:students)
+            {
+                if(studentList.containsKey(sName))
+                {
+                    studentList.remove(sName);
+                }
+            }
+
+            teacherStudentMap.remove(teacherName);
+        }
+        if(teacherList.containsKey(teacherName))
+            teacherList.remove(teacherName);
+
+        //teacherList.remove(teacherName);
     }
     public void deleteAllTeachers()
     {
