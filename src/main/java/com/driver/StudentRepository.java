@@ -21,7 +21,7 @@ public class StudentRepository {
     {
         teacherList.put(teacher.getName(),teacher);
     }
-    public void addPair(String teacherName,String studentName)
+    public void addStudentTeacherPair(String teacherName,String studentName)
     {
         //myMap.put(i,myMap.getOrDefault(i,0)+1);
         List<String> studentsList=new ArrayList<>();

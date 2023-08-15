@@ -41,7 +41,7 @@ public class StudentController {
 
     @PutMapping("/add-student-teacher-pair")
     public ResponseEntity<String> addStudentTeacherPair(@RequestParam String student, @RequestParam String teacher){
-        studentService.addPair(teacher,student);
+        studentService.addStudentTeacherPair(teacher,student);
 
 
 
