@@ -1,5 +1,6 @@
 package com.driver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,22 +18,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("students")
+
 public class StudentController {
+    @Autowired
+    private StudentService studentService;
 
     @PostMapping("/add-student")
     public ResponseEntity<String> addStudent(@RequestBody Student student){
+        studentService.addStudent(student);
+
+
 
         return new ResponseEntity<>("New student added successfully", HttpStatus.CREATED);
     }
 
     @PostMapping("/add-teacher")
     public ResponseEntity<String> addTeacher(@RequestBody Teacher teacher){
+        studentService.addTeacher(teacher);
 
         return new ResponseEntity<>("New teacher added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/add-student-teacher-pair")
     public ResponseEntity<String> addStudentTeacherPair(@RequestParam String student, @RequestParam String teacher){
+        studentService.addPair(teacher,student);
+
+
 
         return new ResponseEntity<>("New student-teacher pair added successfully", HttpStatus.CREATED);
     }
@@ -53,9 +64,11 @@ public class StudentController {
 
     @GetMapping("/get-students-by-teacher-name/{teacher}")
     public ResponseEntity<List<String>> getStudentsByTeacherName(@PathVariable String teacher){
-        List<String> students = null; // Assign list of student by calling service layer method
+        List<String> students=null;
+        students = studentService.getStudentsByTeacherName(teacher); // Assign list of student by calling service layer method
 
-        return new ResponseEntity<>(students, HttpStatus.CREATED);
+
+        return new ResponseEntity<>(students,HttpStatus.OK);
     }
 
     @GetMapping("/get-all-students")
